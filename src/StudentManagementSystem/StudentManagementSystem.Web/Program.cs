@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using StudentManagementSystem.Foundation;
 using StudentManagementSystem.Membership;
 using StudentManagementSystem.Membership.BusinessObjects;
 using StudentManagementSystem.Membership.Contexts;
@@ -23,8 +24,8 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new WebModule())
-    .RegisterModule(new MembershipModule(connectionString, migrationAssemblyName));
-
+    .RegisterModule(new MembershipModule(connectionString, migrationAssemblyName))
+    .RegisterModule(new FoundationModule(connectionString, migrationAssemblyName));
 });
 
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -42,8 +43,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<MembershipDbContext>(options =>
                 options.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly(migrationAssemblyName)));
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 //options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
@@ -120,6 +119,7 @@ builder.Services.AddSingleton<IAuthorizationHandler, SuperAdminRequirementHandle
 builder.Services.AddSingleton<IAuthorizationHandler, TeacherRequirementHandler>();
 builder.Services.AddSingleton<IAuthorizationHandler, StudentRequirementHandler>();
 
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<SuperAdminDataSeed>();
 builder.Services.AddControllersWithViews();
