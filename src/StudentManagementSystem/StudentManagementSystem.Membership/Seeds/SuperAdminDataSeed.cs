@@ -6,38 +6,46 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 
 namespace StudentManagementSystem.Membership.Seeds
 {
     public class SuperAdminDataSeed
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
+
+        public SuperAdminDataSeed() { }
 
         public SuperAdminDataSeed(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
 
+        public void Resolve(ILifetimeScope scope)
+        {
+            _userManager = scope.Resolve<UserManager<ApplicationUser>>();
+        }
+
         public async Task SeedUserAsync()
         {
-            var superAdminUser = new ApplicationUser
+            var modUser = new ApplicationUser
             {
-                UserName = "superadmin@gmail.com",
-                Email = "superadmin@gmail.com",
+                UserName = "SuperAdmin@email.com",
+                Email = "SuperAdmin@email.com",
                 EmailConfirmed = true
             };
 
             IdentityResult result = null;
-            var password = "Hello@Admin";
+            var password = "SuperAdmin@email";
 
-            if (await _userManager.FindByEmailAsync(superAdminUser.Email) == null)
+            if (await _userManager.FindByEmailAsync(modUser.Email) == null)
             {
-                result = await _userManager.CreateAsync(superAdminUser, password);
+                result = await _userManager.CreateAsync(modUser, password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(superAdminUser, "SuperAdmin");
-                    await _userManager.AddClaimAsync(superAdminUser, new Claim("SuperAdmin", "true"));
+                    await _userManager.AddToRoleAsync(modUser, "SuperAdmin");
+                    await _userManager.AddClaimAsync(modUser, new Claim("SuperAdmin", "true"));
                 }
             }
         }

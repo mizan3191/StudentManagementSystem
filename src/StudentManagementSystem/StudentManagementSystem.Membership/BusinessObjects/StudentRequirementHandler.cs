@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace StudentManagementSystem.Membership.BusinessObjects
 {
-    public class ManagerRequirementHandler : AuthorizationHandler<ManagerRequirement>
+    public class StudentRequirementHandler : AuthorizationHandler<StudentRequirement>
     {
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
-            ManagerRequirement requirement)
+            StudentRequirement requirement)
         {
-            var claim = context.User.FindFirst("Manager");
+            var claim = context.User.FindFirst("User");
 
             if(claim != null && bool.Parse(claim.Value))
             {

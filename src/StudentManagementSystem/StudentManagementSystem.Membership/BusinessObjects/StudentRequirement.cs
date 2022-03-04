@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace StudentManagementSystem.Membership.BusinessObjects
 {
-    public class ManagerRequirement : IAuthorizationRequirement
+    public class StudentRequirement : IAuthorizationRequirement
     {
-        public ManagerRequirement()
+        public StudentRequirement()
         {
 
         }
