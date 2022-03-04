@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.Web", "StudentManagementSystem.Web\StudentManagementSystem.Web.csproj", "{3C023B32-0CED-48B8-9466-15153F0C104D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.Membership", "StudentManagementSystem.Membership\StudentManagementSystem.Membership.csproj", "{DCC0CAEE-2912-4849-A951-9AC81EC1C4BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C023B32-0CED-48B8-9466-15153F0C104D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C023B32-0CED-48B8-9466-15153F0C104D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C023B32-0CED-48B8-9466-15153F0C104D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C023B32-0CED-48B8-9466-15153F0C104D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC0CAEE-2912-4849-A951-9AC81EC1C4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC0CAEE-2912-4849-A951-9AC81EC1C4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC0CAEE-2912-4849-A951-9AC81EC1C4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC0CAEE-2912-4849-A951-9AC81EC1C4BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0026DCD9-051D-4F84-B7CD-27A2C9D0DAAD}
+	EndGlobalSection
+EndGlobal
