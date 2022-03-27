@@ -29,7 +29,7 @@ namespace SMS.Membership.Seeds
                 UserName = "SuperAdmin@gmail.com",
                 Email = "SuperAdmin@gmail.com",
                 EmailConfirmed = true,
-                Name = "Mizanur Rahman"
+                FullName = "Mizanur Rahman"
             };
 
             IdentityResult result = null;

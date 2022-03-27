@@ -40,6 +40,7 @@ namespace SMS.Membership
 
             builder.RegisterType<MembershipUnitOfWork>().As<IMembershipUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<MailSenderService>().As<IMailSenderService>().InstancePerLifetimeScope();
+            builder.RegisterType<UrlService>().As<IUrlService>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

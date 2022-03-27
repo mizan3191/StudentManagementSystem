@@ -1,5 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using DevSkill.Http.Emails;
+using DevSkill.Http.Emails.BusinessObjects;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SMS.Foundation;
+using SMS.Foundation.Utilities.Settings;
 using SMS.Membership;
 using SMS.Membership.Contexts;
 using SMS.Membership.Entities.ApplicationUsers;
@@ -47,12 +50,14 @@ namespace SMS.Web
             var connectionInfo = GetConnectionStringAndAssemblyName();
 
             builder.RegisterModule(new MembershipModule(connectionInfo.connectionString, connectionInfo.migrationAssemblyName))
-                .RegisterModule(new FoundationModule(connectionInfo.connectionString, connectionInfo.migrationAssemblyName));
+                .RegisterModule(new FoundationModule(connectionInfo.connectionString, connectionInfo.migrationAssemblyName))
+                .RegisterModule(new EmailMessagingModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName))
+                .RegisterModule(new WebModule());
         }
 
         private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
         {
-            var connectionStringName = "DefaultConnection";
+            var connectionStringName = "SMSDbConnection";
             var connectionString = Configuration.GetConnectionString(connectionStringName);
             var migrationAssemblyName = typeof(Startup).Assembly.FullName;
             return (connectionString, migrationAssemblyName);
@@ -117,6 +122,12 @@ namespace SMS.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            services.Configure<PathSettings>(Configuration.GetSection("Paths"));
+            services.Configure<SmtpConfiguration>(Configuration.GetSection("Smtp"));
+            services.Configure<ReCaptchaKey>(Configuration.GetSection("ReCAPTCHASettings"));
+            services.Configure<DefaultSiteSettings>(Configuration.GetSection("DefaultSiteSettings"));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();

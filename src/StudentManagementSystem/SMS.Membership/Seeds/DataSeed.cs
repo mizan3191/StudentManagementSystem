@@ -16,6 +16,7 @@ namespace SMS.Membership.Seeds
                 return new Role[]
                 {
                     new Role { Id = Guid.NewGuid(), Name = "SuperAdmin", NormalizedName = "SUPERADMIN", ConcurrencyStamp = Guid.NewGuid().ToString() },
+                    new Role { Id = Guid.NewGuid(), Name = "CompanyAdmin", NormalizedName = "COMPANYADMIN", ConcurrencyStamp = Guid.NewGuid().ToString() },
                     new Role { Id = Guid.NewGuid(), Name = "Teacher", NormalizedName = "TEACHER", ConcurrencyStamp = Guid.NewGuid().ToString() },
                     new Role { Id = Guid.NewGuid(), Name = "Student", NormalizedName = "STUDENT", ConcurrencyStamp = Guid.NewGuid().ToString() },
                 };
